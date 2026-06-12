@@ -32,6 +32,28 @@ public Employee getEmployeeById(Long id) {
 }
 
 @Override
+public Employee updateEmployee(Long id, Employee employee) {
+
+
+Employee existingEmployee =
+        employeeRepository.findById(id).orElse(null);
+
+if (existingEmployee != null) {
+
+    existingEmployee.setFirstName(employee.getFirstName());
+    existingEmployee.setLastName(employee.getLastName());
+    existingEmployee.setEmail(employee.getEmail());
+    existingEmployee.setSalary(employee.getSalary());
+
+    return employeeRepository.save(existingEmployee);
+}
+
+return null;
+
+}
+
+
+@Override
 public void deleteEmployee(Long id) {
     employeeRepository.deleteById(id);
 }
